@@ -1,4 +1,8 @@
-﻿static class Program {
+﻿using CLIPro.Commands;
+using CLIPro.Utils;
+using CLIPro;
+
+static class Program {
 
     public static Input UserInput {
         get; set;
@@ -13,15 +17,14 @@
         new EchoCommand("echo", "output provided arguments. usefull for testing the I/O service", 2)
     };
 
-    static void Main() {
-
+    static void Main(string[] args) {
         while (true) {
             try {
-                
+
                 string inputStr = Console.ReadLine() ?? string.Empty;
-                
+
                 if (string.IsNullOrEmpty(inputStr)) { return; }
-                
+
                 UserInput = CreateInputFromString(inputStr);
 
                 Command? command = HandleInput(UserInput);
@@ -32,7 +35,7 @@
                 }
             }
             catch {
-                Console.Error.WriteLine("an error occured in the runloop. please restart the application or continue with the debug mod activated!");
+                Console.Error.WriteLine("an error occured in the runloop. please restart the application.");
                 continue;
             }
         }
